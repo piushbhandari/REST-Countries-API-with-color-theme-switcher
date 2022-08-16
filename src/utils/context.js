@@ -2,16 +2,24 @@ import React, { useReducer, useEffect, useContext } from "react";
 import reducer from "./reducer";
 
 const AppContext = React.createContext();
-const initialState = {};
+const initialState = {
+  isFilterModal: false,
+  currentRegion: "",
+};
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const dummyFunc = (id, name) => {
-    dispatch({ type: "dummy", payload: { id: id, name: name } });
-  };
+  function setNewRegion(val) {
+    dispatch({ type: "setNewRegion", payload: val });
+  }
+  function toggleModal() {
+    dispatch({ type: "toggleModal" });
+  }
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, setNewRegion, toggleModal }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

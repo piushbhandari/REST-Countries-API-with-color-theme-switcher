@@ -1,0 +1,15 @@
+.aside {
+  border: 1px solid black;
+  border-radius: 5px;
+  position: absolute;
+  right: 0;
+  top: 6rem;
+  width: 100%;
+  max-width: 20rem;
+  padding: 1.6rem 2.4rem;
+}
+.regionList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
