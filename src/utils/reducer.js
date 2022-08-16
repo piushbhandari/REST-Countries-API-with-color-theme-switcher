@@ -15,16 +15,14 @@ const reducer = (state, action) => {
   if (action.type === "searchCountry") {
     let allCountries = state.allCountries;
     let searchQuery = action.payload.toLowerCase().trim().split(" ").join("");
-    let currentRegion = state.currentRegion;
     console.log(allCountries);
-    let filteredCountries = allCountries.filter(
-      (country) =>
-        country.name.common
-          .toLowerCase()
-          .trim()
-          .split(" ")
-          .join("")
-          .includes(searchQuery) && country.region.includes(currentRegion)
+    let filteredCountries = allCountries.filter((country) =>
+      country.name.common
+        .toLowerCase()
+        .trim()
+        .split(" ")
+        .join("")
+        .includes(searchQuery)
     );
 
     console.log(filteredCountries);

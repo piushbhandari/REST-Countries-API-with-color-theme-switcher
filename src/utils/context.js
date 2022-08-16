@@ -17,13 +17,11 @@ const AppProvider = ({ children }) => {
 
   function setNewRegion(val) {
     dispatch({ type: "setNewRegion", payload: val });
-    dispatch({ type: "searchCountry" });
   }
   function toggleModal() {
     dispatch({ type: "toggleModal" });
   }
   function searchCountry(query) {
-    console.log(query);
     dispatch({ type: "searchCountry", payload: query });
   }
   async function fetchApi(url) {
