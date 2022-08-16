@@ -13,3 +13,18 @@
   font-size: 1.4rem;
   line-height: 2rem;
 }
+.country-name {
+  font-weight: 800;
+  font-size: 1.8rem;
+  line-height: 2.6rem;
+}
+.stat-text {
+  font-weight: 300;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+}
+.stat-text--bold {
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+}

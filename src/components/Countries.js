@@ -1,0 +1,56 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { useGlobalContext } from "../utils/context";
+import { formatNumber } from "../utils/utilityFunctions";
+import styles from "./Countries.module.css";
+const Countries = () => {
+  const { allCountries } = useGlobalContext();
+
+  return (
+    <ul className={styles.countries}>
+      {allCountries.map((country) => {
+        const {
+          flags: png,
+          name: common,
+          population,
+          region,
+          capital,
+        } = country;
+        let formattedPopulation = formatNumber(population);
+        return (
+          <li key={common.common} className={styles.country}>
+            <Link to="#">
+              <div className={styles.imgbox}>
+                <img
+                  className="fit-image"
+                  src={png.png}
+                  alt={`${common.common} flag`}
+                />
+              </div>
+              <div className={styles.textbox}>
+                <p className={`${styles.countryName} country-name`}>
+                  {common.common}
+                </p>
+                <ul className={styles.stats}>
+                  <li className={`${styles.stat} stat-text`}>
+                    <span className="stat-text--bold">Population</span>:{" "}
+                    {formattedPopulation}
+                  </li>
+                  <li className={`${styles.stat} stat-text`}>
+                    {" "}
+                    <span className="stat-text--bold">Region</span>: {region}
+                  </li>
+                  <li className={`${styles.stat} stat-text`}>
+                    <span className="stat-text--bold">Capital</span>: {capital}
+                  </li>
+                </ul>
+              </div>
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+export default Countries;

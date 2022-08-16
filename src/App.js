@@ -1,16 +1,24 @@
 import React from "react";
+import Countries from "./components/Countries";
 import Formbox from "./components/Formbox";
 import Nav from "./components/Nav";
+import { useGlobalContext } from "./utils/context";
 
 const App = () => {
+  const { isLoading } = useGlobalContext();
   return (
     <>
       <Nav />
-      <main>
-        <div className="main-cont">
-          <Formbox />
-        </div>
-      </main>
+      {isLoading ? (
+        "Looooooooooading"
+      ) : (
+        <main>
+          <div className="main-cont">
+            <Formbox />
+            <Countries />
+          </div>
+        </main>
+      )}
     </>
   );
 };
