@@ -5,7 +5,8 @@ import FilterModal from "./FilterModal";
 import { useGlobalContext } from "../utils/context";
 
 const Formbox = () => {
-  const { currentRegion, toggleModal, isFilterModal } = useGlobalContext();
+  const { currentRegion, toggleModal, isFilterModal, searchCountry } =
+    useGlobalContext();
   const [isModal, setModal] = useState(false);
   const [currentInput, setCurrentInput] = useState("");
   function openFilterModal(e) {
@@ -17,6 +18,7 @@ const Formbox = () => {
     const name = e.target.name;
     const val = e.target.value;
     setCurrentInput(val);
+    searchCountry(val);
   }
   return (
     <section className={styles.section__search}>

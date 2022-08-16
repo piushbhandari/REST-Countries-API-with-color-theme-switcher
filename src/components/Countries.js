@@ -4,11 +4,11 @@ import { useGlobalContext } from "../utils/context";
 import { formatNumber } from "../utils/utilityFunctions";
 import styles from "./Countries.module.css";
 const Countries = () => {
-  const { allCountries } = useGlobalContext();
+  const { filteredCountries } = useGlobalContext();
 
   return (
     <ul className={styles.countries}>
-      {allCountries.map((country) => {
+      {filteredCountries.map((country) => {
         const {
           flags: png,
           name: common,

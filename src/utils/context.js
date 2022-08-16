@@ -8,6 +8,8 @@ const initialState = {
   currentRegion: "",
   isLoading: true,
   allCountries: null,
+  filteredCountries: null,
+  searchQuery: "",
 };
 
 const AppProvider = ({ children }) => {
@@ -15,9 +17,14 @@ const AppProvider = ({ children }) => {
 
   function setNewRegion(val) {
     dispatch({ type: "setNewRegion", payload: val });
+    dispatch({ type: "searchCountry" });
   }
   function toggleModal() {
     dispatch({ type: "toggleModal" });
+  }
+  function searchCountry(query) {
+    console.log(query);
+    dispatch({ type: "searchCountry", payload: query });
   }
   async function fetchApi(url) {
     const response = await fetch(url);
@@ -31,7 +38,9 @@ const AppProvider = ({ children }) => {
     });
   }, []);
   return (
-    <AppContext.Provider value={{ ...state, setNewRegion, toggleModal }}>
+    <AppContext.Provider
+      value={{ ...state, setNewRegion, toggleModal, searchCountry }}
+    >
       {children}
     </AppContext.Provider>
   );
