@@ -14,7 +14,7 @@ const CountryStats = ({ country }) => {
     currencies,
     languages,
   } = country;
-  const flagImg = flags.png;
+  const flagImg = flags.svg;
   const countryName = name.common;
   const nativeName = name.nativeName;
   const formattedPopulation = formatNumber(population);
