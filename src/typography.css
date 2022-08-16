@@ -28,3 +28,23 @@
   font-size: 1.4rem;
   line-height: 1.6rem;
 }
+.stat-text--2 {
+  font-weight: 300;
+  font-size: 1.6rem;
+  line-height: 3.2rem;
+}
+.stat-text--bold--2 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 3.2rem;
+}
+.primary-title {
+  font-weight: 800;
+  font-size: 3.2rem;
+  line-height: 4.4rem;
+}
+.border-text {
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+}

@@ -19,7 +19,7 @@ const Countries = () => {
         let formattedPopulation = formatNumber(population);
         return (
           <li key={common.common} className={styles.country}>
-            <Link to="#">
+            <Link to={`/country/${common.common}`}>
               <div className={styles.imgbox}>
                 <img
                   className="fit-image"
