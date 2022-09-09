@@ -72,3 +72,11 @@ main {
 .main-cont {
   border: 1px solid cadetblue;
 }
+.country-card {
+  transform: scale(0.5);
+  opacity: 0;
+}
+.show {
+  transform: scale(1);
+  opacity: 1;
+}

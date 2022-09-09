@@ -24,6 +24,11 @@
   flex-direction: column;
   gap: 0.8rem;
 }
+
+.link:hover,
+.link:focus {
+  transform: translateY(-5px);
+}
 @media all and (max-width: 1222px) {
   .countries {
     gap: 3.5rem;

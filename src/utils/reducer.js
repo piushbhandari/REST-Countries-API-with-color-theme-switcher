@@ -28,6 +28,19 @@ const reducer = (state, action) => {
     console.log(filteredCountries);
     return { ...state, filteredCountries };
   }
+
+  if (action.type === "getBorders") {
+    const data = action.payload;
+
+    let dictionary = data.map((d) => {
+      let countryName = d.name.common;
+      let countryAbbrev = d.cioc;
+      let obj = { [countryName]: countryAbbrev };
+      return obj;
+    });
+
+    return { ...state, countryAbbrevToBorders: dictionary };
+  }
   if (action.type === "toggleLoad") {
     return { ...state, isLoading: action.payload };
   }

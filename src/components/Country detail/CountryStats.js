@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useGlobalContext } from "../../utils/context";
 import { formatNumber } from "../../utils/utilityFunctions";
 import styles from "./CountryStats.module.css";
 const CountryStats = ({ country }) => {
+  const { countryAbbrevToBorders } = useGlobalContext();
   const {
     flags,
     name,
@@ -13,6 +15,7 @@ const CountryStats = ({ country }) => {
     tld,
     currencies,
     languages,
+    borders,
   } = country;
   const flagImg = flags.svg;
   const countryName = name.common;
@@ -25,6 +28,14 @@ const CountryStats = ({ country }) => {
   for (let language in languages) {
     countryLanguages.push(languages[language]);
   }
+  borders ? borders.slice(0, 3): "";
+  const borders__fullName = borders?.map((border) => {
+    const fullName = countryAbbrevToBorders.find(
+      (country) => Object.values(country)[0] === border
+    );
+    return fullName;
+  });
+
   return (
     <section className={styles.statsection}>
       <div className={styles.imgbox}>
@@ -66,14 +77,26 @@ const CountryStats = ({ country }) => {
         </ul>
         <div className={styles.borderbox}>
           <p className="border-text">Border Countries:</p>
-          <ul className={styles.borders}>
-            <li className={styles.border}>
-              <Link to="/">Japan</Link>
-            </li>
-            <li className={styles.border}>
-              <Link to="/">Germany</Link>
-            </li>
-          </ul>
+          {borders ? (
+            <ul className={styles.borders}>
+              {borders__fullName.map((border) => {
+                if (border !== undefined) {
+                  return (
+                    <li
+                      className={styles.border}
+                      key={Object.values(border)[0]}
+                    >
+                      <Link to={`/country/${Object.keys(border)[0]}`}>
+                        {Object.keys(border)[0]}
+                      </Link>
+                    </li>
+                  );
+                }
+              })}
+            </ul>
+          ) : (
+            <p>no borders </p>
+          )}
         </div>
       </div>
     </section>
