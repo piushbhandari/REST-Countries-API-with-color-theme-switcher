@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Formbox.module.css";
 import { BsChevronDown, BsChevronUp, BsSearch } from "react-icons/bs";
 import FilterModal from "./FilterModal";
 import { useGlobalContext } from "../utils/context";
+import { getParams } from "../utils/utilityFunctions";
 
 const Formbox = () => {
   const { currentRegion, toggleModal, isFilterModal, searchCountry } =
     useGlobalContext();
   const [isModal, setModal] = useState(false);
   const [currentInput, setCurrentInput] = useState("");
+
   function openFilterModal(e) {
     e.preventDefault();
     setModal(!isModal);
@@ -20,6 +22,11 @@ const Formbox = () => {
     setCurrentInput(val);
     searchCountry(val);
   }
+
+  useEffect(() => {
+    let paramObj = getParams();
+    if (paramObj.search) setCurrentInput(paramObj.search);
+  }, []);
   return (
     <section className={styles.section__search}>
       <form className={styles.formbox}>

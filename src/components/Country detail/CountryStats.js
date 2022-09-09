@@ -22,13 +22,13 @@ const CountryStats = ({ country }) => {
   const nativeName = name.nativeName;
   const formattedPopulation = formatNumber(population);
   const countryCapital = capital[0];
-  const topLevelDomain = tld[0];
+  const topLevelDomain = tld ? tld[0] : "N/A";
   const currency = Object.values(currencies)[0].name;
   let countryLanguages = [];
   for (let language in languages) {
     countryLanguages.push(languages[language]);
   }
-  borders ? borders.slice(0, 3): "";
+  if (borders) borders.length = 3;
   const borders__fullName = borders?.map((border) => {
     const fullName = countryAbbrevToBorders.find(
       (country) => Object.values(country)[0] === border

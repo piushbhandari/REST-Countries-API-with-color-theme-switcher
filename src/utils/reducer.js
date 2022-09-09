@@ -15,7 +15,6 @@ const reducer = (state, action) => {
   if (action.type === "searchCountry") {
     let allCountries = state.allCountries;
     let searchQuery = action.payload.toLowerCase().trim().split(" ").join("");
-    console.log(allCountries);
     let filteredCountries = allCountries.filter((country) =>
       country.name.common
         .toLowerCase()
@@ -25,7 +24,6 @@ const reducer = (state, action) => {
         .includes(searchQuery)
     );
 
-    console.log(filteredCountries);
     return { ...state, filteredCountries };
   }
 

@@ -1,5 +1,7 @@
 import React, { useReducer, useEffect, useContext } from "react";
+import { useSearchParams } from "react-router-dom";
 import reducer from "./reducer";
+import { getParams } from "./utilityFunctions";
 
 const AppContext = React.createContext();
 const initialState = {
@@ -20,6 +22,7 @@ const initialState = {
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  let [searchParams, setSearchParams] = useSearchParams();
 
   function setNewRegion(val) {
     dispatch({ type: "setNewRegion", payload: val });
@@ -28,6 +31,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "toggleModal" });
   }
   function searchCountry(query) {
+    setSearchParams({ search: query });
     dispatch({ type: "searchCountry", payload: query });
   }
   async function fetchApi(url) {
@@ -37,9 +41,15 @@ const AppProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    fetchApi("https://restcountries.com/v3.1/all").then((data) => {
+    let apiUrl;
+    let paramObj = getParams();
+    apiUrl = "https://restcountries.com/v3.1/all";
+    fetchApi(apiUrl).then((data) => {
       dispatch({ type: "loadData", payload: data });
       dispatch({ type: "getBorders", payload: data });
+      if (paramObj.search)
+        dispatch({ type: "searchCountry", payload: paramObj.search });
+
       dispatch({ type: "toggleLoad", payload: false });
     });
   }, []);
