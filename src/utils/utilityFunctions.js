@@ -5,6 +5,8 @@ export function formatNumber(num, isDecimals) {
   return val;
 }
 
+// gets search params from a url and returns it.
+
 export function getParams() {
   let paramObj = {};
   let currentURL = window.location.href;
