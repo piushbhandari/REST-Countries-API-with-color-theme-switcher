@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect, useContext } from "react";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import reducer from "./reducer";
 
 const AppContext = React.createContext();
@@ -11,6 +10,7 @@ const initialState = {
   filteredCountries: null,
   searchQuery: "",
   countryAbbrevToBorders: null,
+  currentTheme: "light",
   searchParams: {
     region: "",
     theme: "light",
@@ -19,8 +19,6 @@ const initialState = {
 };
 
 const AppProvider = ({ children }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  let { search } = useLocation();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function setNewRegion(val) {
@@ -30,7 +28,6 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "toggleModal" });
   }
   function searchCountry(query) {
-    setSearchParams({ search: query });
     dispatch({ type: "searchCountry", payload: query });
   }
   async function fetchApi(url) {
@@ -40,20 +37,7 @@ const AppProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    let params = {};
-    let apiUrl;
-    let currentParams = search.split("?")[1];
-    let formattedParam = new URLSearchParams(currentParams);
-    for (const [key, value] of formattedParam) {
-      params = { ...params, [key]: value };
-    }
-    console.log(params);
-    apiUrl = params.search
-      ? `https://restcountries.com/v3.1/name/${params.search}`
-      : "https://restcountries.com/v3.1/all";
-
-    console.log(apiUrl);
-    fetchApi(apiUrl).then((data) => {
+    fetchApi("https://restcountries.com/v3.1/all").then((data) => {
       dispatch({ type: "loadData", payload: data });
       dispatch({ type: "getBorders", payload: data });
       dispatch({ type: "toggleLoad", payload: false });
